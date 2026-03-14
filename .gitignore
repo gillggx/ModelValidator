@@ -4,15 +4,6 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Test output (JSON reports — may contain raw model responses)
-*.json
-!package.json
-
-# Generated markdown reports (re-producible by running the tool)
-claude-*.md
-qwen*.md
-gpt-*.md
-deepseek-*.md
 
 # Env / secrets
 .env
