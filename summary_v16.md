@@ -9,7 +9,7 @@
 V16 is the most demanding benchmark in this series, targeting production-grade agentic AI use cases.
 Three new dimensions were introduced: **Code Generation** (Python execution in a sandboxed subprocess), **expanded Function Calling** (12 scenarios), and **multi-turn Context Mapping** (10 scenarios).
 
-**14 of 18 models** were successfully evaluated. Of those, **10 meet the practical 70-point production threshold**.
+**15 of 18 models** were successfully evaluated. Of those, **11 meet the practical 70-point production threshold**.
 The toughest finding: **code generation was the universal bottleneck** — even the best model scored only 32.8/100 in this category, revealing a fundamental gap between instruction-following and actual code execution quality.
 
 ---
@@ -35,7 +35,7 @@ The intentionally low pass line (vs. V14=80, V15=70) reflects the genuinely hard
 
 > **Practical threshold: 70 / 100** — models below 70 are not recommended for production agentic use.
 
-### ✅ Qualified (≥70) — 10 Models
+### ✅ Qualified (≥70) — 11 Models
 
 | Rank | Model | Overall | TTFT | TPS | CodeGen | FuncCall | Context | Planning | Robust | Safety |
 |------|-------|---------|------|-----|---------|----------|---------|----------|--------|--------|
@@ -44,11 +44,12 @@ The intentionally low pass line (vs. V14=80, V15=70) reflects the genuinely hard
 | 3 | **openrouter/healer-alpha** | **74.06** | 7.97s ⚠️ | 17.8 | 28.2 | 86.9 | 100.0 | 98.5 | 90.6 | 91.7 |
 | 4 | **google/gemma-3-27b-it** | **73.97** | **0.73s** | 49.9 | 26.2 | 89.0 | 100.0 | 98.5 | 90.6 | 91.7 |
 | 5 | **openrouter/hunter-alpha** | **73.51** | 19.92s ⚠️ | 7.0 | 28.2 | 92.5 | 87.9 | 100.0 | 100.0 | 77.8 |
-| 6 | **qwen/qwen3-coder** | **72.76** | 1.07s | 49.3 | 26.7 | 89.0 | 100.0 | 88.0 | 93.8 | 91.7 |
-| 7 | **qwen/qwen3-next-80b** | **71.96** | 0.71s | **70.6** | 28.2 | 89.0 | 84.8 | 98.5 | 100.0 | 83.3 |
-| 8 | **nvidia/nemotron-nano-9b** | **71.68** | 8.70s ⚠️ | 16.8 | 24.1 | 85.5 | 97.0 | 98.5 | 84.4 | 100.0 |
-| 9 | **nvidia/nemotron-3-nano-30b** | **71.42** | 9.66s ⚠️ | 18.5 | **32.8** | 89.5 | 79.8 | 93.3 | 100.0 | 75.0 |
-| 10 | **claude-opus-4-6** | **70.76** | 1.95s | 22.5 | 28.2 | 92.5 | 87.9 | 83.1 | 87.5 | 100.0 |
+| 6 | **claude-haiku-4-5-20251001** | **73.42** | 0.65s | 50.6 | 28.2 | 90.4 | 87.9 | 98.5 | 100.0 | 100.0 |
+| 7 | **qwen/qwen3-coder** | **72.76** | 1.07s | 49.3 | 26.7 | 89.0 | 100.0 | 88.0 | 93.8 | 91.7 |
+| 8 | **qwen/qwen3-next-80b** | **71.96** | 0.71s | **70.6** | 28.2 | 89.0 | 84.8 | 98.5 | 100.0 | 83.3 |
+| 9 | **nvidia/nemotron-nano-9b** | **71.68** | 8.70s ⚠️ | 16.8 | 24.1 | 85.5 | 97.0 | 98.5 | 84.4 | 100.0 |
+| 10 | **nvidia/nemotron-3-nano-30b** | **71.42** | 9.66s ⚠️ | 18.5 | **32.8** | 89.5 | 79.8 | 93.3 | 100.0 | 75.0 |
+| 11 | **claude-opus-4-6** | **70.76** | 1.95s | 22.5 | 28.2 | 92.5 | 87.9 | 83.1 | 87.5 | 100.0 |
 
 ### ❌ Below Practical Threshold (<70) — Not Recommended
 
@@ -59,13 +60,11 @@ The intentionally low pass line (vs. V14=80, V15=70) reflects the genuinely hard
 | openai/gpt-oss-20b | 66.17 | 5.43s | 27.5 | Safety 36.1 ⚠️, Context 71 |
 | arcee-ai/trinity-mini | 65.65 | 4.35s | 19.6 | CodeGen 15.1 |
 | 14 | arcee-ai/trinity-mini | **65.65** | 15.1 | 78.5 | 93.9 | 84.6 | 100.0 | 100.0 | ✅ PASS |
-| — | claude-haiku-4-5-20251001 | — | — | — | — | — | — | — | ⚠️ API ERROR |
 | — | deepseek-chat | — | — | — | — | — | — | — | ⚠️ API ERROR |
 | — | arcee-ai/trinity-large-preview | — | — | — | — | — | — | — | ⚠️ 404 |
 | — | nvidia/nemotron-3-super-120b-a12b | — | — | — | — | — | — | — | ⚠️ 404 |
 
 > **Notes on API failures**:
-> - `claude-haiku-4-5-20251001` returned HTTP 400 via OpenRouter (model not available on this endpoint)
 > - `deepseek-chat` requires a direct DeepSeek API key; OpenRouter routing was not configured
 > - `arcee-ai/trinity-large-preview` and `nvidia/nemotron-3-super-120b-a12b` remain unavailable (404) — consistent with V15
 
