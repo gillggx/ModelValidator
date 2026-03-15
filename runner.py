@@ -71,7 +71,7 @@ MAX_RETRIES = 3
 # Anthropic runner
 # ──────────────────────────────────────────────
 
-async def _run_anthropic(model: str, prompt: str) -> RunResult:
+async def _run_anthropic(model: str, messages: list[dict]) -> RunResult:
     try:
         import anthropic
     except ImportError:
@@ -99,7 +99,7 @@ async def _run_anthropic(model: str, prompt: str) -> RunResult:
                 async with client.messages.stream(
                     model=model,
                     max_tokens=4096,
-                    messages=[{"role": "user", "content": prompt}]
+                    messages=messages
                 ) as stream:
                     async for text in stream.text_stream:
                         if ttft is None:
@@ -144,7 +144,7 @@ async def _run_anthropic(model: str, prompt: str) -> RunResult:
 # OpenAI runner (also used for DeepSeek)
 # ──────────────────────────────────────────────
 
-async def _run_openai(model: str, prompt: str, provider: str = "openai") -> RunResult:
+async def _run_openai(model: str, messages: list[dict], provider: str = "openai") -> RunResult:
     try:
         from openai import AsyncOpenAI, RateLimitError
     except ImportError:
@@ -187,7 +187,7 @@ async def _run_openai(model: str, prompt: str, provider: str = "openai") -> RunR
             async with asyncio.timeout(HARD_TIMEOUT):
                 stream = await client.chat.completions.create(
                     model=model,
-                    messages=[{"role": "user", "content": prompt}],
+                    messages=messages,
                     max_tokens=4096,
                     stream=True,
                 )
@@ -236,7 +236,7 @@ async def _run_openai(model: str, prompt: str, provider: str = "openai") -> RunR
 # Unified dispatch
 # ──────────────────────────────────────────────
 
-async def run_single(model: str, scenario_id: str, prompt: str) -> RunResult:
+async def run_single(model: str, scenario_id: str, messages: list[dict]) -> RunResult:
     provider = MODEL_PROVIDERS.get(model)
     if provider is None:
         # Auto-detect by prefix
@@ -250,9 +250,9 @@ async def run_single(model: str, scenario_id: str, prompt: str) -> RunResult:
             provider = "openai"
 
     if provider == "anthropic":
-        result = await _run_anthropic(model, prompt)
+        result = await _run_anthropic(model, messages)
     elif provider in ("openai", "deepseek", "custom"):
-        result = await _run_openai(model, prompt, provider)
+        result = await _run_openai(model, messages, provider)
     else:
         result = RunResult(model=model, scenario_id=scenario_id, response="",
                            ttft=0, total_time=0, tps=0, token_count=0,
@@ -275,8 +275,13 @@ async def run_all_scenarios(
 
     async def run_one(model: str, scenario) -> dict:
         async with semaphore:
-            prompt, ground_truth = scenario.build()
-            run_result = await run_single(model, scenario.id, prompt)
+            payload, ground_truth = scenario.build()
+            # Support both V14 (str prompt) and V15 (messages list)
+            if isinstance(payload, str):
+                messages = [{"role": "user", "content": payload}]
+            else:
+                messages = payload
+            run_result = await run_single(model, scenario.id, messages)
             if run_result.error and not run_result.response:
                 from scenarios import ValidationResult
                 val_result = ValidationResult(
@@ -289,7 +294,7 @@ async def run_all_scenarios(
                 "scenario": scenario,
                 "run": run_result,
                 "validation": val_result,
-                "prompt": prompt,
+                "prompt": messages[-1]["content"] if messages else "",  # store last user message
                 "ground_truth": ground_truth,
             }
 
