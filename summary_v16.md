@@ -1,6 +1,6 @@
 # LLM Core Integrity Validator — V16 Benchmark Summary
 
-> **Suite**: V16 Agentic + Code Gen  |  **Date**: 2026-03-15  |  **Scenarios**: 50  |  **Pass Line**: 65 / 100
+> **Suite**: V16 Agentic + Code Gen  |  **Date**: 2026-03-15  |  **Scenarios**: 50  |  **Pass Line**: 65 / 100  |  **Practical Threshold**: 70 / 100
 
 ---
 
@@ -9,7 +9,7 @@
 V16 is the most demanding benchmark in this series, targeting production-grade agentic AI use cases.
 Three new dimensions were introduced: **Code Generation** (Python execution in a sandboxed subprocess), **expanded Function Calling** (12 scenarios), and **multi-turn Context Mapping** (10 scenarios).
 
-**14 of 18 models** were successfully evaluated. Of those, **14 passed** the 65-point threshold.
+**14 of 18 models** were successfully evaluated. Of those, **10 meet the practical 70-point production threshold**.
 The toughest finding: **code generation was the universal bottleneck** — even the best model scored only 32.8/100 in this category, revealing a fundamental gap between instruction-following and actual code execution quality.
 
 ---
@@ -31,23 +31,33 @@ The intentionally low pass line (vs. V14=80, V15=70) reflects the genuinely hard
 
 ---
 
-## Final Rankings
+## Final Rankings (含延遲數據)
 
-| Rank | Model | Overall | CodeGen | FuncCall | Context | Planning | Robust | Safety | Verdict |
-|------|-------|---------|---------|----------|---------|----------|--------|--------|---------|
-| 1 | **anthropic/claude-sonnet-4-6** | **75.46** | 28.2 | 92.5 | 100.0 | 98.5 | 90.6 | 91.7 | ✅ PASS |
-| 2 | meta-llama/llama-3.3-70b-instruct | **74.75** | 26.7 | 92.5 | 100.0 | 98.5 | 90.6 | 83.3 | ✅ PASS |
-| 3 | openrouter/healer-alpha | **74.06** | 28.2 | 86.9 | 100.0 | 98.5 | 90.6 | 91.7 | ✅ PASS |
-| 4 | google/gemma-3-27b-it | **73.97** | 26.2 | 89.0 | 100.0 | 98.5 | 90.6 | 91.7 | ✅ PASS |
-| 5 | openrouter/hunter-alpha | **73.51** | 28.2 | 92.5 | 87.9 | 100.0 | 100.0 | 77.8 | ✅ PASS |
-| 6 | qwen/qwen3-coder | **72.76** | 26.7 | 89.0 | 100.0 | 88.0 | 93.8 | 91.7 | ✅ PASS |
-| 7 | qwen/qwen3-next-80b-a3b-instruct | **71.96** | 28.2 | 89.0 | 84.8 | 98.5 | 100.0 | 83.3 | ✅ PASS |
-| 8 | nvidia/nemotron-nano-9b-v2 | **71.68** | 24.1 | 85.5 | 97.0 | 98.5 | 84.4 | 100.0 | ✅ PASS |
-| 9 | nvidia/nemotron-3-nano-30b-a3b | **71.42** | 32.8 | 89.5 | 79.8 | 93.3 | 100.0 | 75.0 | ✅ PASS |
-| 10 | anthropic/claude-opus-4-6 | **70.76** | 28.2 | 92.5 | 87.9 | 83.1 | 87.5 | 100.0 | ✅ PASS |
-| 11 | mistralai/mistral-small-3.1-24b-instruct | **69.21** | 28.2 | 89.0 | 84.8 | 83.1 | 93.8 | 83.3 | ✅ PASS |
-| 12 | openai/gpt-oss-120b | **66.21** | 28.2 | 78.2 | 76.8 | 98.5 | 100.0 | 36.1 | ✅ PASS |
-| 13 | openai/gpt-oss-20b | **66.17** | 26.7 | 89.0 | 70.7 | 100.0 | 81.2 | 36.1 | ✅ PASS |
+> **Practical threshold: 70 / 100** — models below 70 are not recommended for production agentic use.
+
+### ✅ Qualified (≥70) — 10 Models
+
+| Rank | Model | Overall | TTFT | TPS | CodeGen | FuncCall | Context | Planning | Robust | Safety |
+|------|-------|---------|------|-----|---------|----------|---------|----------|--------|--------|
+| 1 | **claude-sonnet-4-6** | **75.46** | 1.44s | 25.1 | 28.2 | 92.5 | 100.0 | 98.5 | 90.6 | 91.7 |
+| 2 | **meta-llama/llama-3.3-70b** | **74.75** | 1.93s | 38.1 | 26.7 | 92.5 | 100.0 | 98.5 | 90.6 | 83.3 |
+| 3 | **openrouter/healer-alpha** | **74.06** | 7.97s ⚠️ | 17.8 | 28.2 | 86.9 | 100.0 | 98.5 | 90.6 | 91.7 |
+| 4 | **google/gemma-3-27b-it** | **73.97** | **0.73s** | 49.9 | 26.2 | 89.0 | 100.0 | 98.5 | 90.6 | 91.7 |
+| 5 | **openrouter/hunter-alpha** | **73.51** | 19.92s ⚠️ | 7.0 | 28.2 | 92.5 | 87.9 | 100.0 | 100.0 | 77.8 |
+| 6 | **qwen/qwen3-coder** | **72.76** | 1.07s | 49.3 | 26.7 | 89.0 | 100.0 | 88.0 | 93.8 | 91.7 |
+| 7 | **qwen/qwen3-next-80b** | **71.96** | 0.71s | **70.6** | 28.2 | 89.0 | 84.8 | 98.5 | 100.0 | 83.3 |
+| 8 | **nvidia/nemotron-nano-9b** | **71.68** | 8.70s ⚠️ | 16.8 | 24.1 | 85.5 | 97.0 | 98.5 | 84.4 | 100.0 |
+| 9 | **nvidia/nemotron-3-nano-30b** | **71.42** | 9.66s ⚠️ | 18.5 | **32.8** | 89.5 | 79.8 | 93.3 | 100.0 | 75.0 |
+| 10 | **claude-opus-4-6** | **70.76** | 1.95s | 22.5 | 28.2 | 92.5 | 87.9 | 83.1 | 87.5 | 100.0 |
+
+### ❌ Below Practical Threshold (<70) — Not Recommended
+
+| Model | Overall | TTFT | TPS | Main Weakness |
+|-------|---------|------|-----|---------------|
+| mistral-small-3.1 | 69.21 | 2.00s | 26.7 | Planning 83, Context 85 |
+| openai/gpt-oss-120b | 66.21 | 3.42s | 36.7 | Safety 36.1 ⚠️ |
+| openai/gpt-oss-20b | 66.17 | 5.43s | 27.5 | Safety 36.1 ⚠️, Context 71 |
+| arcee-ai/trinity-mini | 65.65 | 4.35s | 19.6 | CodeGen 15.1 |
 | 14 | arcee-ai/trinity-mini | **65.65** | 15.1 | 78.5 | 93.9 | 84.6 | 100.0 | 100.0 | ✅ PASS |
 | — | claude-haiku-4-5-20251001 | — | — | — | — | — | — | — | ⚠️ API ERROR |
 | — | deepseek-chat | — | — | — | — | — | — | — | ⚠️ API ERROR |
@@ -245,14 +255,19 @@ The score deflation across suites is intentional — each version adds harder sc
 
 ## Recommendations by Use Case
 
-| Use Case | Recommended Model | Rationale |
-|----------|------------------|-----------|
-| General agentic AI | **claude-sonnet-4-6** | Best overall balance across all 6 dimensions |
-| Cost-efficient agentic | **meta-llama/llama-3.3-70b** | 74.75, likely cheaper than Claude at scale |
-| Code agent | **nvidia/nemotron-3-nano-30b** | Best code gen (32.8), excellent robustness |
-| Safety-critical workflows | **nvidia/nemotron-nano-9b-v2** or **arcee-ai/trinity-mini** | Both achieve 100.0 on safety |
-| Context-heavy multi-turn | **claude-sonnet**, **llama-3.3-70b**, **gemma-3-27b**, or **qwen3-coder** | All score 100.0 on context mapping |
-| Planning-first agents | **hunter-alpha** or **gpt-oss-20b** | Both score 100.0 on planning |
+> Only models scoring ≥70 are considered below.
+
+| Use Case | Recommended Model | Score | TTFT | Rationale |
+|----------|------------------|-------|------|-----------|
+| General agentic AI | **claude-sonnet-4-6** | 75.46 | 1.44s | Best overall balance, fast response |
+| Cost-efficient agentic | **google/gemma-3-27b-it** | 73.97 | 0.73s | Fastest TTFT, 49.9 TPS, top-4 score |
+| High-throughput batch | **qwen/qwen3-next-80b** | 71.96 | 0.71s | 70.6 TPS 最高，適合大量平行任務 |
+| Code agent | **nvidia/nemotron-3-nano-30b** | 71.42 | 9.66s ⚠️ | Best code gen (32.8)，但延遲高 |
+| Safety-critical workflows | **claude-opus-4-6** | 70.76 | 1.95s | Safety 100.0，穩定 |
+| Context-heavy multi-turn | **claude-sonnet** / **llama-3.3-70b** / **gemma-3-27b** / **qwen3-coder** | 72-75 | <2s | 四個模型 Context 都拿 100.0 且速度快 |
+| Real-time interactive agent | **google/gemma-3-27b-it** | 73.97 | **0.73s** | TTFT 最短，使用者體驗最佳 |
+
+> ⚠️ **healer-alpha**（TTFT 8s）和 **hunter-alpha**（TTFT 20s）雖然分數高，但延遲太大，不適合互動型 agentic 場景。
 
 ---
 
