@@ -25,8 +25,9 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskPr
 
 from scenarios import ALL_SCENARIOS, get_scenarios
 from scenarios_v15 import ALL_SCENARIOS_V15, get_scenarios_v15
+from scenarios_v16 import ALL_SCENARIOS_V16, get_scenarios_v16
 from runner import run_all_scenarios
-from reporter import build_report, save_report, save_markdown_reports, save_agenticai_summary
+from reporter import build_report, save_report, save_markdown_reports, save_agenticai_summary, save_v16_summary
 
 load_dotenv()
 console = Console()
@@ -38,16 +39,18 @@ console = Console()
 
 @click.group()
 def cli():
-    """LLM Core Integrity Validator v15.0"""
+    """LLM Core Integrity Validator v16.0"""
     pass
 
 
 @cli.command()
-@click.option("--suite", default="v14", type=click.Choice(["v14", "v15"]),
-              show_default=True, help="Which suite to list: v14 or v15")
+@click.option("--suite", default="v14", type=click.Choice(["v14", "v15", "v16"]),
+              show_default=True, help="Which suite to list: v14, v15, or v16")
 def list_scenarios(suite: str):
     """List all test scenarios."""
-    if suite == "v15":
+    if suite == "v16":
+        _list_scenarios_v16()
+    elif suite == "v15":
         _list_scenarios_v15()
     else:
         _list_scenarios_v14()
@@ -125,18 +128,36 @@ def _list_scenarios_v15():
     console.print(table)
 
 
+def _list_scenarios_v16():
+    table = Table(title="50 Agentic AI + Code Gen Scenarios (V16)", box=box.ROUNDED)
+    table.add_column("ID", style="cyan", width=8)
+    table.add_column("Name", style="white", width=30)
+    table.add_column("Category", style="yellow", width=18)
+    table.add_column("Difficulty", style="magenta", width=6)
+
+    for sc in ALL_SCENARIOS_V16:
+        difficulty = getattr(sc, "difficulty", "—")
+        table.add_row(sc.id, sc.name, sc.category, difficulty)
+
+    console.print(table)
+    console.print("\n[bold]Category Weights:[/bold] code_gen=30% | function_calling=25% | "
+                  "context_mapping=20% | planning=15% | robustness=7% | safety=3%")
+    console.print("[bold]Pass Line:[/bold] 65 / 100 | "
+                  "[bold]Difficulty Weights:[/bold] 1x=1.0 | 1.5x=1.5 | 2x=2.0")
+
+
 @cli.command()
 @click.option("--models", required=True,
               help="Comma-separated model IDs. e.g. claude-3-5-sonnet-20241022,gpt-4o-2024-08-06")
 @click.option("--scenarios", default="all",
-              help="Comma-separated scenario IDs (e.g. 01,02,05) or 'all'")
+              help="Comma-separated scenario IDs (e.g. 01,02,05 / v15_01 / v16_01) or 'all'")
 @click.option("--output", default=None,
-              help="Output file path for report JSON (default: test_report.json or test_report_v15.json)")
+              help="Output file path for report JSON")
 @click.option("--concurrency", default=5, show_default=True,
               help="Max concurrent API calls per model")
-@click.option("--suite", default="v14", type=click.Choice(["v14", "v15", "all"]),
+@click.option("--suite", default="v14", type=click.Choice(["v14", "v15", "v16", "all"]),
               show_default=True,
-              help="Test suite to run: v14 (classic), v15 (agentic), or all (both)")
+              help="Test suite: v14 (classic), v15 (agentic), v16 (agentic+codegen), all")
 def run(models: str, scenarios: str, output: str, concurrency: int, suite: str):
     """Run integrity tests against one or more LLM models."""
     model_list = [m.strip() for m in models.split(",") if m.strip()]
@@ -145,22 +166,31 @@ def run(models: str, scenarios: str, output: str, concurrency: int, suite: str):
         sys.exit(1)
 
     if suite == "all":
-        # Run both suites sequentially
         _run_suite(model_list, scenarios, output or "test_report.json", concurrency, "v14")
         _run_suite(model_list, scenarios, output or "test_report_v15.json", concurrency, "v15")
+        _run_suite(model_list, scenarios, output or "test_report_v16.json", concurrency, "v16")
     else:
-        default_output = "test_report_v15.json" if suite == "v15" else "test_report.json"
-        _run_suite(model_list, scenarios, output or default_output, concurrency, suite)
+        defaults = {"v14": "test_report.json", "v15": "test_report_v15.json", "v16": "test_report_v16.json"}
+        _run_suite(model_list, scenarios, output or defaults.get(suite, "test_report.json"), concurrency, suite)
 
 
 def _run_suite(model_list: list, scenarios_filter: str, output: str, concurrency: int, suite: str):
     """Internal helper to run a single test suite."""
-    if suite == "v15":
+    if suite == "v16":
+        if scenarios_filter.lower() == "all":
+            scenario_list = ALL_SCENARIOS_V16
+        else:
+            ids = [s.strip() for s in scenarios_filter.split(",")]
+            prefixed = [f"v16_{i.zfill(2)}" if not i.startswith("v16_") else i for i in ids]
+            scenario_list = get_scenarios_v16(prefixed)
+            if not scenario_list:
+                console.print("[red]Error: no valid V16 scenario IDs found.[/red]")
+                sys.exit(1)
+    elif suite == "v15":
         if scenarios_filter.lower() == "all":
             scenario_list = ALL_SCENARIOS_V15
         else:
             ids = [s.strip() for s in scenarios_filter.split(",")]
-            # Prefix IDs if not already prefixed
             prefixed = [f"v15_{i.zfill(2)}" if not i.startswith("v15_") else i for i in ids]
             scenario_list = get_scenarios_v15(prefixed)
             if not scenario_list:
@@ -176,7 +206,12 @@ def _run_suite(model_list: list, scenarios_filter: str, output: str, concurrency
                 console.print("[red]Error: no valid scenario IDs found.[/red]")
                 sys.exit(1)
 
-    suite_label = "V15 Agentic AI" if suite == "v15" else "V14 Core Integrity"
+    suite_labels = {
+        "v14": "V14 Core Integrity",
+        "v15": "V15 Agentic AI",
+        "v16": "V16 Agentic + Code Gen",
+    }
+    suite_label = suite_labels.get(suite, suite.upper())
 
     console.print(Panel(
         f"[bold cyan]LLM Core Integrity Validator — {suite_label}[/bold cyan]\n"
@@ -199,13 +234,16 @@ def _run_suite(model_list: list, scenarios_filter: str, output: str, concurrency
     # Auto-generate markdown reports (one per model)
     md_files = save_markdown_reports(report, output, suite=suite)
 
-    # For V15: also generate agenticAI_summary.md
+    # Suite-specific summary files
     summary_path = None
+    import os as _os
+    base_dir = _os.path.dirname(_os.path.abspath(output))
     if suite == "v15":
-        import os
-        base_dir = os.path.dirname(os.path.abspath(output))
-        summary_path = os.path.join(base_dir, "agenticAI_summary.md")
+        summary_path = _os.path.join(base_dir, "agenticAI_summary.md")
         save_agenticai_summary(report, summary_path)
+    elif suite == "v16":
+        summary_path = _os.path.join(base_dir, "agenticCodeGen_summary.md")
+        save_v16_summary(report, summary_path)
 
     # Print results table
     _print_results(report, model_list, suite=suite)
@@ -219,14 +257,22 @@ def _run_suite(model_list: list, scenarios_filter: str, output: str, concurrency
 def _print_results(report: dict, models: list[str], suite: str = "v14") -> None:
     """Print a rich summary table."""
     is_v15 = suite == "v15"
+    is_v16 = suite == "v16"
 
-    # Per-model summary
-    title = "Overall Results (V15 Agentic)" if is_v15 else "Overall Results (V14)"
-    summary = Table(title=title, box=box.DOUBLE_EDGE)
+    titles = {"v14": "Overall Results (V14)", "v15": "Overall Results (V15 Agentic)",
+              "v16": "Overall Results (V16 Agentic+CodeGen)"}
+    summary = Table(title=titles.get(suite, "Overall Results"), box=box.DOUBLE_EDGE)
     summary.add_column("Model", style="cyan")
     summary.add_column("Overall", justify="right")
 
-    if is_v15:
+    if is_v16:
+        summary.add_column("CodeGen", justify="right")
+        summary.add_column("FuncCall", justify="right")
+        summary.add_column("Context", justify="right")
+        summary.add_column("Planning", justify="right")
+        summary.add_column("Robust", justify="right")
+        summary.add_column("Safety", justify="right")
+    elif is_v15:
         summary.add_column("Precision", justify="right")
         summary.add_column("Planning", justify="right")
         summary.add_column("Context", justify="right")
@@ -249,29 +295,37 @@ def _print_results(report: dict, models: list[str], suite: str = "v14") -> None:
         perf = res["performance"]
         verdict_style = "bold green" if entry["passed"] else "bold red"
 
-        if is_v15:
+        if is_v16:
             summary.add_row(
-                model,
-                f"[bold]{entry['score']}[/bold]",
+                model, f"[bold]{entry['score']}[/bold]",
+                str(ds.get("code_gen", "N/A")),
+                str(ds.get("function_calling", "N/A")),
+                str(ds.get("context_mapping", "N/A")),
+                str(ds.get("planning", "N/A")),
+                str(ds.get("robustness", "N/A")),
+                str(ds.get("safety", "N/A")),
+                f"{perf['ttft_avg']:.2f}s", f"{perf['tps_avg']:.1f}",
+                f"[{verdict_style}]{res['verdict']}[/{verdict_style}]",
+            )
+        elif is_v15:
+            summary.add_row(
+                model, f"[bold]{entry['score']}[/bold]",
                 str(ds.get("precision", "N/A")),
                 str(ds.get("planning", "N/A")),
                 str(ds.get("context", "N/A")),
                 str(ds.get("robustness", "N/A")),
                 str(ds.get("safety", "N/A")),
-                f"{perf['ttft_avg']:.2f}s",
-                f"{perf['tps_avg']:.1f}",
+                f"{perf['ttft_avg']:.2f}s", f"{perf['tps_avg']:.1f}",
                 f"[{verdict_style}]{res['verdict']}[/{verdict_style}]",
             )
         else:
             summary.add_row(
-                model,
-                f"[bold]{entry['score']}[/bold]",
+                model, f"[bold]{entry['score']}[/bold]",
                 str(ds.get("fidelity", "N/A")),
                 str(ds.get("stability", "N/A")),
                 str(ds.get("speed", "N/A")),
                 str(ds.get("consistency", "N/A")),
-                f"{perf['ttft_avg']:.2f}s",
-                f"{perf['tps_avg']:.1f}",
+                f"{perf['ttft_avg']:.2f}s", f"{perf['tps_avg']:.1f}",
                 f"[{verdict_style}]{res['verdict']}[/{verdict_style}]",
             )
 

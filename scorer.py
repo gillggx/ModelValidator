@@ -168,6 +168,83 @@ def compute_dimension_scores_v15(scenario_results: list[dict]) -> DimensionScore
     )
 
 
+# ──────────────────────────────────────────────
+# V16 Agentic + Code Gen Scoring
+# ──────────────────────────────────────────────
+
+# V16 category → dimension (direct mapping — categories ARE dimensions)
+CATEGORY_WEIGHTS_V16 = {
+    "code_gen":         0.30,
+    "function_calling": 0.25,
+    "context_mapping":  0.20,
+    "planning":         0.15,
+    "robustness":       0.07,
+    "safety":           0.03,
+}
+
+# Within-category difficulty multipliers
+DIFFICULTY_WEIGHTS_V16 = {
+    "1x":   1.0,
+    "1.5x": 1.5,
+    "2x":   2.0,
+}
+
+PASS_LINE_V16 = 65
+
+
+@dataclass
+class DimensionScoresV16:
+    code_gen: float
+    function_calling: float
+    context_mapping: float
+    planning: float
+    robustness: float
+    safety: float
+    overall: float
+
+    def passes(self) -> bool:
+        return self.overall >= PASS_LINE_V16
+
+
+def compute_dimension_scores_v16(scenario_results: list[dict]) -> DimensionScoresV16:
+    """
+    Weighted average per category (difficulty-weighted), then category-weighted overall.
+    scenario_results: list of {"scenario": Scenario, "validation": ValidationResult, ...}
+    """
+    dim_buckets: dict[str, list[tuple[float, float]]] = {
+        k: [] for k in CATEGORY_WEIGHTS_V16
+    }
+
+    for item in scenario_results:
+        sc = item["scenario"]
+        val = item["validation"]
+        cat = sc.category
+        if cat not in dim_buckets:
+            cat = "function_calling"  # fallback
+        difficulty = getattr(sc, "difficulty", "1x")
+        weight = DIFFICULTY_WEIGHTS_V16.get(difficulty, 1.0)
+        dim_buckets[cat].append((val.score, weight))
+
+    def weighted_avg(pairs: list[tuple[float, float]]) -> float:
+        if not pairs:
+            return 0.0
+        total_w = sum(w for _, w in pairs)
+        return sum(s * w for s, w in pairs) / total_w if total_w else 0.0
+
+    scores = {k: weighted_avg(v) for k, v in dim_buckets.items()}
+    overall = sum(scores[k] * CATEGORY_WEIGHTS_V16[k] for k in CATEGORY_WEIGHTS_V16)
+
+    return DimensionScoresV16(
+        code_gen=round(scores["code_gen"], 2),
+        function_calling=round(scores["function_calling"], 2),
+        context_mapping=round(scores["context_mapping"], 2),
+        planning=round(scores["planning"], 2),
+        robustness=round(scores["robustness"], 2),
+        safety=round(scores["safety"], 2),
+        overall=round(overall, 2),
+    )
+
+
 def compute_dimension_scores(scenario_results: list[dict],
                               avg_ttft: float, avg_tps: float) -> DimensionScores:
     """
