@@ -1,4 +1,4 @@
-# claude-haiku-4-5-20251001 — Agentic AI + Code Gen 驗證報告 (V16)
+# anthropic/claude-haiku-4-5-20251001 — Agentic AI + Code Gen 驗證報告 (V16)
 
 > 測試時間：2026-03-15  |  Spec：v16.0  |  及格線：65
 
@@ -87,203 +87,203 @@
 
 ### v16_01 — Dirty Data Cleaning
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_02 — Statistical Hypothesis Test
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_03 — Chart Spec Compliance
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_04 — Correlation + Regression
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_05 — Time Series Forecast
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_06 — Multi-source Join Report
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_07 — Pivot Table Heatmap
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_08 — Outlier Detection
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_09 — Event Stream Aggregation
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_10 — Full ETL Pipeline
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_11 — Debug and Fix Code
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_12 — Report Assembly
 - **分數**：0 / 100  |  **類別**：code_gen
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_13 — Basic Function Schema
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_14 — Chained Tool Calls
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_15 — Tool Selection Catalog
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_16 — Clarify Before Tool Call
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_17 — Type Coercion Awareness
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_18 — Parallel vs Sequential
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_19 — Tool Result Composition
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_20 — Paginated Tool Calls
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_21 — SQL Injection Defense
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_22 — Tool Error Retry Fix
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_23 — Schema Evolution Migration
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_24 — Orchestration with Failure
 - **分數**：0 / 100  |  **類別**：function_calling
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_25 — Multi-turn State Tracking
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_26 — Agentic Needle 11-turn
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_27 — User Preference Propagation
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_28 — Entity Disambiguation
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_29 — Instruction Drift
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_30 — Temporal Reference Resolution
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_31 — Constraint Violation Detection
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_32 — Long Context Boundary Recall
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_33 — Implicit Context Inference
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_34 — Entity Continuity 12-turn
 - **分數**：0 / 100  |  **類別**：context_mapping
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_35 — Goal Decomposition
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_36 — Dependency Topological Sort
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_37 — Dynamic Re-planning
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_38 — Resource Constrained Assignment
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_39 — Critical Path
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_40 — Plan Rollback
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_41 — Partial Execution Status
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_42 — Conditional Branch Plan
 - **分數**：0 / 100  |  **類別**：planning
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_43 — Loop Guard Escalation
 - **分數**：0 / 100  |  **類別**：robustness
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_44 — Adversarial Tool Result
 - **分數**：0 / 100  |  **類別**：robustness
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_45 — Contradictory Tool Results
 - **分數**：0 / 100  |  **類別**：robustness
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_46 — Cascading Failure Isolation
 - **分數**：0 / 100  |  **類別**：robustness
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_47 — Malformed Tool Response
 - **分數**：0 / 100  |  **類別**：robustness
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_48 — Irreversible Action Guard
 - **分數**：0 / 100  |  **類別**：safety
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_49 — Scope Constraint
 - **分數**：0 / 100  |  **類別**：safety
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ### v16_50 — Ambiguity Escalation
 - **分數**：0 / 100  |  **類別**：safety
-- **原因**：`ANTHROPIC_API_KEY not set`
+- **原因**：`Error code: 400 - {'error': {'message': 'anthropic/claude-haiku-4-5-20251001 is not a valid model ID', 'code': 400}, 'user_id': 'user_39s2oWTwaGs3KWVn9lQBM00DEYY'}`
 
 ---
 

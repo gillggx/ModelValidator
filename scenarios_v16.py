@@ -1618,7 +1618,7 @@ class V16Scenario39(Scenario):
             "path_includes_B": "B" in cp or "B" in text,
             "path_includes_E": "E" in cp or "E" in text,
             "duration_12": duration == 12 or "12" in response,
-            "path_starts_A_ends_H": (cp and cp[0] == "A" and cp[-1] == "H"),
+            "path_starts_A_ends_H": bool(cp and cp[0] == "A" and cp[-1] == "H"),
         }
         ok = sum(checks.values())
         score = ok / len(checks) * 100
